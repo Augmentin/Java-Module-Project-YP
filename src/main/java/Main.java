@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int participantsNumber = 3;
+        String[] answersToContinue = new String[]{ "да", "lf", "y", "yes"};
         while (true) {
             try {
                 System.out.println("Привет! Эта программа для расчета лидера в гонки 24 часа Ле-Мана.");
@@ -14,12 +15,12 @@ public class Main {
                 Race race = new Race();
                 Car leader = null;
                 for (int i = 1; i <= participantsNumber; i++) {
-                    leader = race.getLeader(getCarFromInput(i));
+                    leader = race.evaluateLeader(getCarFromInput(i));
                 }
                 System.out.println("Самая быстрая машина: " + leader.name);
                 System.out.println("Заного? да/нет");
                 String continueAnswer = scanner.next();
-                if (!Arrays.asList(new String[]{ "да", "lf", "y", "yes"}).contains(continueAnswer.trim().toLowerCase())) {
+                if (!Arrays.asList(answersToContinue).contains(continueAnswer.trim().toLowerCase())) {
                     System.out.println("До свидания");
                     break;
                 }
@@ -48,7 +49,7 @@ public class Main {
             System.out.println("Введите скорость машины №" + carNumber);
             if (scanner.hasNextInt()) {
                 int speed = scanner.nextInt();
-                if (0 < speed && speed <= 250) {
+                if (Race.minimumSpeed < speed && speed <= Race.maximumSpeed) {
                     name = name.trim();
                     car = new Car(name, speed);
                     System.out.println("Машина с именем " + car.name + " зарегистрирована! Ее скорость: " + car.speed);
