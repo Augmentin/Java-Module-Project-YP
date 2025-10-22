@@ -6,6 +6,7 @@ public class Race {
     private final int durationHours = 24;
     public static final int minimumSpeed = 0;
     public static final int maximumSpeed = 250;
+
     public Car evaluateLeader(Car car) {
         if (currentLeader == null) {
             currentLeader = car;
