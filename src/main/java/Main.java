@@ -3,10 +3,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         int participantsNumber = 3;
         while (true) {
             try {
@@ -34,8 +33,17 @@ public class Main {
 
     private static Car getCarFromInput(int carNumber) {
         Car car;
-        System.out.println("Введите имя машины №" + carNumber);
-        String name = scanner.next();
+        String name;
+        Scanner scanner = new Scanner(System.in);
+        while (true){
+            System.out.println("Введите имя машины №" + carNumber);
+            name = scanner.nextLine();
+            if(name.trim().isEmpty()){
+                System.out.println("Введите не пустое значение");
+            }else {
+                break;
+            }
+        }
         while (true) {
             System.out.println("Введите скорость машины №" + carNumber);
             if (scanner.hasNextInt()) {
@@ -53,6 +61,7 @@ public class Main {
                 scanner.next();
             }
         }
+
         return car;
     }
 }
